@@ -19,14 +19,25 @@ data "terraform_remote_state" "this" {
 }
 
 locals {
-  outputs = { for k, v in data.terraform_remote_state.this : k => v.outputs }
+  outputs = {
+    for k, v in data.terraform_remote_state.this : k => v.outputs
+  }
 }
 
-module "aks_cluster" {
-  source  = "Azure/aks/azurerm//examples/application_gateway_ingress"
-  version = "9.1.0"
+resource "null_resource" "aks_cluster" {
+  # Changes to any instance of the cluster requires re-provisioning
+  triggers = {
 
-  resource_group_name = "${var.environment}-demo"
-  # vnet_id = local.outputs["network"]["virtual_network_id"]
-  # vnet_subnet_id = local.outputs["network"]["subnet_id"]
+    vnet_id = lookup(
+      local.outputs["network"],
+      "virtual_network_id",
+      ""
+    )
+
+    vnet_subnet_id = lookup(
+      local.outputs["network"],
+      "subnet_id",
+      ""
+    )
+  }
 }
