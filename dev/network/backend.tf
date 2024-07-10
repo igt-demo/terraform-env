@@ -1,7 +1,7 @@
 terraform {
   backend "remote" {
     hostname     = "lifeci.scalr.io"
-    organization = "dev" # environment
+    organization = "dev"
 
     workspaces {
       name = "network"
