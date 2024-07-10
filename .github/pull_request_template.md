@@ -1,6 +1,6 @@
 ### Jira ticket
 
-[PLAT-XXXx](https://your-org.atlassian.net/browse/PLAT-xxx)
+[PLAT-XXX](https://your-org.atlassian.net/browse/PLAT-xxx)
 
 ### Changes
 -
