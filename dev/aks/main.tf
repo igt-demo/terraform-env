@@ -23,7 +23,7 @@ locals {
 }
 
 module "aks_cluster" {
-  source  = "Azure/aks/azurerm//examples/application_gateway_ingress"
+  source  = "Azure/aks/azurerm//examples/named_cluster"
   version = "9.1.0"
 
   resource_group_name = "${var.environment}-demo"
